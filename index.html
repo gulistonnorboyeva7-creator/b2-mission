@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<meta name="description" content="40 kunlik Milliy Multilevel B2 tayyorgarlik platformasi">
+<link rel="manifest" href="manifest.webmanifest">
+<title>B2 Mission</title>
+<style>
+:root{--bg:#f5f5f2;--panel:#fff;--ink:#151515;--muted:#777;--line:#e7e7e2;--accent:#111;--green:#16834a;--soft:#f0f0ec}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}button,input,textarea,select{font:inherit}button{cursor:pointer}
+header{position:sticky;top:0;z-index:5;background:rgba(245,245,242,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:13px 16px}
+.top{max-width:900px;margin:auto;display:flex;align-items:center;justify-content:space-between}.brand{font-size:19px;font-weight:800;letter-spacing:-.6px}.sub{font-size:11px;color:var(--muted)}
+main{max-width:900px;margin:0 auto;padding:18px 14px 95px}.hero{background:#111;color:#fff;border-radius:20px;padding:20px;margin-bottom:14px}.hero small{color:#bcbcbc}.hero h1{font-size:29px;line-height:1.05;margin:8px 0}.hero p{color:#c9c9c9;margin:0 0 15px;font-size:13px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:#242424;border-radius:12px;padding:10px}.stat b{font-size:20px;display:block}.stat span{font-size:10px;color:#aaa}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:15px;margin:12px 0}.card h2{font-size:17px;margin:0 0 12px}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.muted{color:var(--muted);font-size:12px}.bar{height:8px;background:#ecece8;border-radius:9px;overflow:hidden}.bar>i{display:block;height:100%;background:#161616;border-radius:9px;width:0}.tabs{position:fixed;bottom:0;left:0;right:0;z-index:6;background:#fff;border-top:1px solid var(--line);display:flex;justify-content:center;padding:7px 4px calc(7px + env(safe-area-inset-bottom));gap:2px}.tabs button{border:0;background:transparent;color:#777;padding:8px 9px;border-radius:10px;font-size:11px;flex:1;max-width:150px}.tabs button.active{background:#111;color:#fff}.btn{border:0;background:#111;color:#fff;border-radius:11px;padding:11px 14px;font-weight:650}.btn.secondary{background:var(--soft);color:#111}.btn.small{padding:7px 10px;font-size:12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.skill{border:1px solid var(--line);border-radius:12px;padding:11px}.skill b{display:block;font-size:18px}.skill label{font-size:11px;color:var(--muted)}.task{display:flex;gap:10px;align-items:flex-start;padding:11px 0;border-bottom:1px solid var(--line)}.task:last-child{border:0}.task input{width:19px;height:19px;accent-color:#111;margin:1px 0 0}.task.done .taskname{text-decoration:line-through;color:#999}.taskname{font-weight:600}.task small{display:block;color:var(--muted);font-size:11px;margin-top:2px}.daylist{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.daybtn{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 3px;font-size:12px}.daybtn.selected{background:#111;color:#fff;border-color:#111}.daybtn.complete{border-color:#16834a}.field{width:100%;padding:11px;border:1px solid var(--line);border-radius:10px;background:#fff;margin:5px 0 10px}.section{display:none}.section.active{display:block}.pill{font-size:10px;background:#efefeb;padding:4px 8px;border-radius:20px;color:#555}.testq{padding:12px 0;border-bottom:1px solid var(--line)}.testq label{display:block;padding:5px 0;font-size:13px}.note{font-size:12px;color:var(--muted);line-height:1.5}.empty{padding:20px;text-align:center;color:var(--muted)}footer{text-align:center;color:#999;font-size:10px;padding:18px}
+@media(min-width:650px){main{padding-top:24px}.hero{padding:25px}.hero h1{font-size:36px}.daylist{grid-template-columns:repeat(10,1fr)}}
+</style>
+</head>
+<body>
+<header><div class="top"><div><div class="brand">B2 MISSION <span class="pill">40 DAYS</span></div><div class="sub">UZBMB · MULTILEVEL · PERSONAL DASHBOARD</div></div><button class="btn small secondary" id="installBtn" hidden>Install</button></div></header>
+<main>
+<section id="dashboard" class="section active">
+ <div class="hero"><small id="todayLabel">DAY 1 / 40</small><h1>Build your B2.<br>One day at a time.</h1><p>Har kuni 120 daqiqa. Kichik, izchil qadamlar.</p>
+ <div class="stats"><div class="stat"><b id="overall">48</b><span>START SCORE</span></div><div class="stat"><b>55</b><span>TARGET</span></div><div class="stat"><b id="daysDone">0/40</b><span>DAYS DONE</span></div></div></div>
+ <div class="card"><div class="row"><h2>Today’s progress</h2><b id="percent">0%</b></div><div class="bar"><i id="progressBar"></i></div><p class="muted" id="dailySummary">Bugungi 6 ta blokni bajaring.</p><button class="btn" onclick="showTab('plan')">Open today’s tasks</button></div>
+ <div class="card"><h2>Skill tracker</h2><div class="grid" id="skillCards"></div><p class="note">Mock natijalarini Progress bo‘limida yangilang. Targetlar kafolat emas, tayyorgarlik mo‘ljali.</p></div>
+ <div class="card"><h2>40-day journey</h2><div class="daylist" id="miniDays"></div></div>
+</section>
+
+<section id="plan" class="section">
+ <div class="row"><div><h2>40-Day Plan</h2><div class="muted">Kun tanlang va topshiriqlarni belgilang.</div></div><span class="pill" id="weekPill">WEEK 1</span></div>
+ <div class="card"><div class="daylist" id="dayPicker"></div></div>
+ <div class="card"><div class="row"><h2 id="dayTitle">Day 1</h2><span class="pill" id="dayDate">24 Nov</span></div><p class="muted" id="dayFocus"></p><div id="tasks"></div><div class="row"><button class="btn secondary small" id="prevDay">← Previous</button><button class="btn small" id="nextDay">Next day →</button></div></div>
+</section>
+
+<section id="tests" class="section">
+ <h2>Practice & Tests</h2><p class="muted">Mini nazoratlar va o‘z-o‘zini tekshirish. Bu rasmiy UZBMB testining o‘rnini bosmaydi.</p>
+ <div class="card"><h2>Speaking practice</h2><label class="muted">Part 2 prompt</label><div id="speakingPrompt" style="font-weight:650;margin:8px 0 12px"></div><button class="btn secondary" onclick="newPrompt()">New prompt</button><p class="note">1 daqiqa rejalashtir, 2 daqiqa gapir va telefoningga yozib ol. Keyin javobingni o‘zing tekshir: fluency, grammar, vocabulary, coherence.</p></div>
+ <div class="card"><h2>Writing practice</h2><label class="muted">Task turi</label><select class="field" id="writingType"><option>Task 1 — Email</option><option>Task 2 — Essay / online article</option></select><div id="writingPrompt" style="font-weight:600;margin:8px 0 10px"></div><textarea class="field" id="writingAnswer" rows="7" placeholder="Write your answer here..."></textarea><div class="row"><span class="muted" id="wordCount">0 words</span><button class="btn small" onclick="saveWriting()">Save locally</button></div><p class="note" id="savedWriting"></p></div>
+ <div class="card"><h2>Quick grammar check</h2><div id="quiz"></div><button class="btn" onclick="checkQuiz()">Check answers</button><p id="quizResult" class="muted"></p></div>
+</section>
+
+<section id="progress" class="section">
+ <h2>Progress & scores</h2><p class="muted">Mock testdan olgan ballaringizni kiriting (0–75).</p>
+ <div class="card"><h2>Latest scores</h2><div class="grid" id="scoreInputs"></div><button class="btn" onclick="saveScores()">Save scores</button><p id="scoreSaved" class="muted"></p></div>
+ <div class="card"><h2>Score history</h2><div id="history"></div></div>
+ <div class="card"><h2>Error log</h2><textarea id="errorLog" class="field" rows="5" placeholder="Takrorlanayotgan xatolar, yangi iboralar, keyingi safar tuzatadigan jihatlar..."></textarea><button class="btn secondary" onclick="saveError()">Save notes</button><span class="muted" id="errorSaved"></span></div>
+ <div class="card"><h2>Data backup</h2><p class="note">Ma’lumotlar ushbu brauzer qurilmasida saqlanadi. Brauzer ma’lumotlarini tozalasangiz yo‘qolishi mumkin. Zaxira nusxa yuklab oling.</p><div class="row"><button class="btn secondary small" onclick="exportData()">Export backup</button><label class="btn secondary small">Import backup<input type="file" id="importFile" accept="application/json" hidden></label></div><button class="btn secondary small" style="margin-top:10px" onclick="resetData()">Reset all data</button></div>
+</section>
+<footer>B2 MISSION · Built for your 40-day Multilevel preparation</footer>
+</main>
+<nav class="tabs"><button class="active" data-tab="dashboard">Home</button><button data-tab="plan">40 days</button><button data-tab="tests">Practice</button><button data-tab="progress">Progress</button></nav>
+<script>
+const STORAGE='b2mission-v1';
+const blocks=[['Speaking','30 min','Daily speaking task'],['Writing','30 min','Daily writing task'],['Listening','20 min','Focused listening practice'],['Reading','20 min','Timed reading practice'],['Grammar + Vocabulary','15 min','Grammar and useful collocations'],['Error analysis','5 min','Record mistakes and corrections']];
+const focuses=[
+['Diagnostika va fundament','8 ta speaking savoli; boshlang‘ich Task 1 yozuvi.','Listening 1-qism diagnostika; Reading 1-qism.','Present, Past, Future tenses.'],
+['Shaxsiy mavzular','Part 1.1: home, family, hobbies.','Task 1: email rejalash va yozish.','Listening 2-qism; Reading 2-qism.','Present Perfect.'],
+['Rasm taqqoslash','Part 1.2: ikki rasmni taqqoslash.','Task 2: introduction va thesis.','Listening 3-qism; Reading 3-qism.','Modal verbs.'],
+['Education','Part 2: education mavzusida 2 daqiqa.','Task 2: body paragraph.','Listening 4-qism; Reading 4-qism.','Conditionals.'],
+['Technology','Part 2: technology.','Task 1: yangi mavzu.','Listening 5-qism; Reading 5-qism.','Relative clauses.'],
+['Argumentation','Part 3: education — for/against.','Task 2: to‘liq matn.','Listening 6-qism; Reading qiyin qismlar.','Linking words.'],
+['Haftalik nazorat','1–6-kun mavzularidan speaking sinovi.','Task 1 va Task 2 xatolarini tuzatish.','Listening/Reading mini-test.','Mixed revision.'],
+['City life','Part 1.2: city vs countryside.','Task 1: to‘liq topshiriq.','Listening 1–2; Reading 1–2.','Passive voice.'],
+['Environment','Part 2: environment.','Task 2: environment.','Paraphrase va detail.','Reported speech.'],
+['Social media','Part 2: social media.','Task 1: yangi topshiriq.','Main idea va distractors.','Gerund/infinitive.'],
+['Online learning','Part 3: online vs traditional learning.','Task 2: argumentation.','Inference practice.','Complex sentences.'],
+['Education systems','Part 2: education systems.','Task 1: grammar accuracy.','Accent va key information.','Articles.'],
+['Debate','Part 3: online vs traditional learning.','Task 2: to‘liq topshiriq.','Timed listening/reading.','Prepositions.'],
+['Nazorat','4 qism speaking sinovi.','60 daqiqalik Writing sinovi.','Mini listening va reading test.','Mixed grammar.'],
+['Transport','Part 2: public transport.','Task 2: transport.','Paraphrase recognition.','Advanced linking devices.'],
+['Health','Part 2: health and lifestyle.','Task 1.','Detail listening.','Word formation.'],
+['Work','Part 3: working from home.','Task 2: advantages/disadvantages.','Inference listening/reading.','Collocations.'],
+['Services','Part 1.2: shopping and services.','Task 1.','Speaker attitude.','Phrasal verbs.'],
+['AI','Part 2: artificial intelligence.','Task 2: opinion.','Longer audio.','Complex clauses.'],
+['Environment debate','Part 3: environmental responsibility.','Task 1 + editing.','Full section practice.','Synonyms/paraphrasing.'],
+['Mock checkpoint','To‘liq Speaking simulyatsiyasi.','To‘liq Writing simulyatsiyasi.','Listening/Reading mini mock.','Mixed review.'],
+['Speed: short answers','Part 1.1 tezkor javoblar.','Task 1 vaqt bilan.','Weak listening parts.','Error correction.'],
+['Picture comparison','Part 1.2: 45/30/30 soniya.','Task 2 vaqt bilan.','Weak reading parts.','Paraphrasing.'],
+['Long turn','Part 2: 1+2 daqiqalik mashq.','Task 1.','Listening timing.','Sentence variety.'],
+['Balanced argument','Part 3: ikki tomonlama fikr.','Task 2.','Reading timing.','Cohesion.'],
+['Fluency','Part 2: 3 ta tasodifiy mavzu.','Task 1 + tahrir.','Distractors.','Common errors.'],
+['Full sequence','4 qism ketma-ket.','2 topshiriqli Writing.','Listening/Reading timed sections.','Mixed review.'],
+['Mock checkpoint','Speaking sinovi.','60 daqiqalik Writing sinovi.','35 savollik Listening va Reading sinovi.','Xatolarni tuzatish.'],
+['Science','Part 2: science and technology.','Task 2.','Weak parts.','Vocabulary revision.'],
+['Society','Part 3: modern society.','Task 1.','Full timed practice.','Grammar revision.'],
+['Work and leisure','Part 1.2: work and leisure.','Task 1.','Weak parts.','Word formation.'],
+['Globalisation','Part 2: globalisation.','Task 2.','Inference.','Collocations.'],
+['Future','Part 3: education and future.','Task 2.','Full listening/reading.','Complex structures.'],
+['Weak points','Zaif mavzulardan speaking.','Zaif formatdan writing.','Targeted practice.','Personal error list.'],
+['Final mock','To‘liq Speaking sinovi.','To‘liq Writing sinovi.','To‘liq Listening va Reading.','Mock analysis.'],
+['Repair','Part 2 va Part 3.','Task 1 va Task 2.','Xato qilingan savollarni qayta ishlash.','Error correction.'],
+['Speaking focus','To‘liq Speaking sinovi.','Writing xatolarini qayta yozish.','Yengil timed practice.','Useful phrases.'],
+['Final writing','Part 1.1 va 1.2.','60 daqiqalik Writing.','Listening/Reading mini-test.','Grammar accuracy.'],
+['Light review','Yengil Speaking takrorlash.','Yengil Writing tahlili.','Yengil listening va reading.','Faqat muhim xatolar.'],
+['Final day','Yakuniy Speaking nazorati.','Yakuniy xatolar tahlili.','Yengil takrorlash.','Keyingi qadamlar.']
+];
+const prompts=['Describe a skill you would like to learn. Why is it important?','Talk about a time you solved a difficult problem.','Describe a place you would recommend visiting.','Some people prefer studying alone, while others prefer groups. Discuss.','Describe a change that has improved your daily life.','Do the advantages of technology outweigh its disadvantages?','What can individuals do to protect the environment?','Is university education necessary for success?','How has social media changed communication?','Should public transport be free?'];
+const writePrompts=['You recently joined a course. Write an email to a friend explaining what you like about it and inviting them to join.','Some people believe that online education is better than traditional classroom learning. Discuss both views and give your opinion.','You bought a product that did not meet expectations. Write a formal email explaining the problem and requesting a solution.','Many people think cities should invest more in public transport than roads. To what extent do you agree?'];
+let state={day:1,completed:{},scores:[50,61,43,39],history:[],error:'',writing:'',savedWriting:'',activePrompt:0};
+function load(){try{const x=JSON.parse(localStorage.getItem(STORAGE));if(x)state={...state,...x}}catch(e){}}
+function save(){localStorage.setItem(STORAGE,JSON.stringify(state));render()}
+function dayTasks(d){let f=focuses[d-1]||focuses[0];return blocks.map((b,i)=>({title:b[0],time:b[1],desc:i===0?f[1]:i===1?f[2]:i===2?f[3]||'Listening: targeted section and transcript review':i===3?'Reading: timed practice and answer analysis':i===4?f[4]||'10 useful words/collocations; make your own sentences':'Write down repeated errors and corrections'}))}
+function doneCount(d){return (state.completed[d]||[]).length}
+function render(){document.getElementById('todayLabel').textContent=`DAY ${state.day} / 40`;document.getElementById('daysDone').textContent=Object.values(state.completed).filter(x=>x.length===6).length+'/40';let pct=Math.round(doneCount(state.day)/6*100);document.getElementById('percent').textContent=pct+'%';document.getElementById('progressBar').style.width=pct+'%';document.getElementById('dailySummary').textContent=`${doneCount(state.day)} of 6 blocks completed for Day ${state.day}.`;document.getElementById('skillCards').innerHTML=['Listening','Reading','Writing','Speaking'].map((s,i)=>`<div class="skill"><label>${s}</label><b>${state.scores[i]}</b><span class="muted">/ 75</span></div>`).join('');document.getElementById('miniDays').innerHTML=Array.from({length:40},(_,i)=>`<button class="daybtn ${state.day===i+1?'selected':''} ${doneCount(i+1)===6?'complete':''}" onclick="selectDay(${i+1})">${i+1}</button>`).join('');document.getElementById('dayPicker').innerHTML=Array.from({length:40},(_,i)=>`<button class="daybtn ${state.day===i+1?'selected':''} ${doneCount(i+1)===6?'complete':''}" onclick="selectDay(${i+1})">${i+1}</button>`).join('');let f=focuses[state.day-1];document.getElementById('dayTitle').textContent='Day '+state.day;document.getElementById('weekPill').textContent='WEEK '+Math.ceil(state.day/7);document.getElementById('dayDate').textContent=new Date(2026,10,23+state.day).toLocaleDateString('en-GB',{day:'numeric',month:'short'});document.getElementById('dayFocus').textContent=f[0];document.getElementById('tasks').innerHTML=dayTasks(state.day).map((t,i)=>`<div class="task ${(state.completed[state.day]||[]).includes(i)?'done':''}"><input type="checkbox" ${((state.completed[state.day]||[]).includes(i))?'checked':''} onchange="toggleTask(${state.day},${i},this.checked)"><div><div class="taskname">${t.title} · ${t.time}</div><small>${t.desc}</small></div></div>`).join('');document.getElementById('scoreInputs').innerHTML=['Listening','Reading','Writing','Speaking'].map((s,i)=>`<div><label class="muted">${s}</label><input class="field" type="number" min="0" max="75" id="score${i}" value="${state.scores[i]}"></div>`).join('');document.getElementById('history').innerHTML=state.history.length?state.history.slice().reverse().map(h=>`<p class="muted">${h.date}: ${h.scores.join(' / ')} · Overall ${h.overall}</p>`).join(''):'<p class="muted">Hali mock natijalari saqlanmagan.</p>';document.getElementById('errorLog').value=state.error;document.getElementById('writingAnswer').value=state.writing;document.getElementById('savedWriting').textContent=state.savedWriting;document.getElementById('wordCount').textContent=(state.writing.trim()?state.writing.trim().split(/\s+/).length:0)+' words';document.getElementById('speakingPrompt').textContent=prompts[state.activePrompt];document.getElementById('writingPrompt').textContent=writePrompts[(state.day-1)%writePrompts.length];}
+function selectDay(d){state.day=d;save();showTab('plan')}
+function toggleTask(d,i,v){let a=state.completed[d]||[];state.completed[d]=v?[...new Set([...a,i])]:a.filter(x=>x!==i);save()}
+function showTab(t){document.querySelectorAll('.section').forEach(x=>x.classList.toggle('active',x.id===t));document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('active',x.dataset.tab===t));window.scrollTo(0,0)}
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.getElementById('prevDay').onclick=()=>selectDay(Math.max(1,state.day-1));document.getElementById('nextDay').onclick=()=>selectDay(Math.min(40,state.day+1));
+function newPrompt(){state.activePrompt=(state.activePrompt+1)%prompts.length;save()}
+function saveWriting(){state.writing=document.getElementById('writingAnswer').value;state.savedWriting='Saved on this device · '+new Date().toLocaleString();save()}
+document.getElementById('writingAnswer').addEventListener('input',e=>document.getElementById('wordCount').textContent=(e.target.value.trim()?e.target.value.trim().split(/\s+/).length:0)+' words');
+function saveScores(){let a=[0,1,2,3].map(i=>Math.max(0,Math.min(75,Number(document.getElementById('score'+i).value)||0)));state.scores=a;state.history.push({date:new Date().toLocaleDateString(),scores:a,overall:(a.reduce((x,y)=>x+y,0)/4).toFixed(1)});state.history=state.history.slice(-20);save();document.getElementById('scoreSaved').textContent='Scores saved.'}
+function saveError(){state.error=document.getElementById('errorLog').value;save();document.getElementById('errorSaved').textContent='Saved locally.'}
+const quizData=[{q:'If I ___ more time, I would learn another language.',a:['have','had','will have'],c:1},{q:'The report ___ yesterday.',a:['was completed','completed','has completing'],c:0},{q:'She suggested ___ earlier.',a:['leave','to leave','leaving'],c:2}];
+function renderQuiz(){document.getElementById('quiz').innerHTML=quizData.map((q,i)=>`<div class="testq"><b>${i+1}. ${q.q}</b>${q.a.map((a,j)=>`<label><input type="radio" name="q${i}" value="${j}"> ${a}</label>`).join('')}</div>`).join('')}
+function checkQuiz(){let n=0;quizData.forEach((q,i)=>{let v=document.querySelector(`input[name=q${i}]:checked`);if(v&&Number(v.value)===q.c)n++});document.getElementById('quizResult').textContent=`${n} / ${quizData.length} correct. ${n===3?'Excellent!':'Review the grammar and try again.'}`}
+function exportData(){let blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='b2-mission-backup.json';a.click();URL.revokeObjectURL(a.href)}
+document.getElementById('importFile').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{state={...state,...JSON.parse(r.result)};save();alert('Backup imported.')}catch(err){alert('Invalid backup file.')}};r.readAsText(f)});
+function resetData(){if(confirm('Barcha progress va yozuvlar o‘chirilsinmi?')){localStorage.removeItem(STORAGE);state={day:1,completed:{},scores:[50,61,43,39],history:[],error:'',writing:'',savedWriting:'',activePrompt:0};render()}}
+load();render();renderQuiz();
+let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;let b=document.getElementById('installBtn');b.hidden=false;b.onclick=async()=>{deferredPrompt.prompt();deferredPrompt=null;b.hidden=true}});
+if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+</script>
+</body></html>
